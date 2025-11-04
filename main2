@@ -1,0 +1,19 @@
+name: Frequent Tests
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install pytest
+        run: pip install pytest
+      - name: Run tests and log
+        run: |
+          echo 'Starting test run...'
+          pytest -v test_sample.py
+          echo 'Test completed successfully'
+EOF
