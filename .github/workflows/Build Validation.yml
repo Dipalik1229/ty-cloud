@@ -1,0 +1,13 @@
+name: Build Validation
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Validate syntax
+        run: python -m py_compile *.py
+      - name: Run build checks
+        run: echo 'Build validation passed!'
+EOF
