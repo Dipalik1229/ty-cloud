@@ -1,0 +1,32 @@
+import datetime
+import platform
+import sys
+
+def system_health_check():
+    print('=' * 50)
+    print('SYSTEM HEALTH CHECK')
+    print('=' * 50)
+    print(f'Timestamp: {datetime.datetime.now()}')
+    print(f'Python Version: {sys.version}')
+    print(f'Platform: {platform.system()}')
+    print('Status: System is healthy')
+    print('=' * 50)
+
+if __name__ == '__main__':
+    system_health_check()
+eof\
+
+name: System Health Check
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Run health check
+        run: python health_check.py
+EOF
